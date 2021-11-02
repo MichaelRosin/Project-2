@@ -24,7 +24,7 @@ h2 {
     padding: 0;
     margin: 0;
     text-align: center;
-    color: rgb(255, 217, 9);
+    color: white;
 }
 
 .lblemail, .lblpassword, .lblusername {
@@ -60,10 +60,21 @@ h2 {
 }
 
 .btnsubmit:hover {
+        background-color: rgb(204, 204, 204);
+
+}
+
+.btnshare {
+    border: none;
+    outline: none;
+    height: 40px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 20px;
+    transition: .3s ease-in-out
+}
+
+    .btnshare:hover {
         background-color: goldenrod;
-
-}
-
-}
-
+    }
 

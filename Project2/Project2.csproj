@@ -107,6 +107,7 @@
   <ItemGroup>
     <Content Include="50-Beautiful-and-Minimalist-Presentation-Backgrounds-02.jpg" />
     <Content Include="About.aspx" />
+    <Content Include="Access.css" />
     <Content Include="App_Data\Database1.mdf" />
     <Content Include="App_Data\Database1_log.ldf">
       <DependentUpon>Database1.mdf</DependentUpon>
@@ -117,6 +118,8 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Site.css" />
+    <Content Include="cooltext396442663624504.png" />
+    <Content Include="cooltext396455928968337.png" />
     <Content Include="Default.aspx" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -130,6 +133,9 @@
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
+    <Content Include="Image.css" />
+    <Content Include="ImageAccess.aspx" />
+    <Content Include="ImageShare.aspx" />
     <Content Include="Login.aspx" />
     <Content Include="Login.css" />
     <Content Include="Scripts\bootstrap.js" />
@@ -160,7 +166,6 @@
     <Content Include="Scripts\WebForms\WebForms.js" />
     <Content Include="Scripts\WebForms\WebParts.js" />
     <Content Include="Scripts\WebForms\WebUIValidation.js" />
-    <Content Include="simple-background-backgrounds-passion-simple-1-5c9b95bd34713.png" />
     <Content Include="Site.Master" />
     <Content Include="User_icon_2.svg.png" />
     <Content Include="ViewSwitcher.ascx" />
@@ -194,6 +199,20 @@
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="ImageAccess.aspx.cs">
+      <DependentUpon>ImageAccess.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ImageAccess.aspx.designer.cs">
+      <DependentUpon>ImageAccess.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ImageShare.aspx.cs">
+      <DependentUpon>ImageShare.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ImageShare.aspx.designer.cs">
+      <DependentUpon>ImageShare.aspx</DependentUpon>
     </Compile>
     <Compile Include="Login.aspx.cs">
       <DependentUpon>Login.aspx</DependentUpon>
