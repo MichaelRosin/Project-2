@@ -31,6 +31,11 @@
             box-sizing: border-box;
         }
   
+        .auto-style4 {
+            width: 585px;
+            height: 96px;
+        }
+  
     </style>
 </head>
 <body>
@@ -40,14 +45,21 @@
         
         &nbsp;<h2>Login/Register<img src="User_icon_2.svg.png" alt="Alternate Text" class="auto-style2" /></h2>
         <form runat="server">
+            <br />
             <asp:Label Text="Username" CssClass="lblusername" runat="server" />
-            <asp:Textbox runat="server" CssClass="txtusername" placeholder="example: WaterFlow123" ID="txtusername" ForeColor="#FFD909" />
+            <br />
+            <asp:Textbox runat="server" CssClass="txtpassword" placeholder="example: WaterFlow123" ID="txtusername" ForeColor="White" />
+            <br />
             <asp:Label Text="Password" CssClass="lblpassword" runat="server" />
-            <asp:Textbox runat="server" CssClass="txtpassword" placeholder="********" ID="txtpassword" ForeColor="#FFD909" />
+            <asp:Textbox runat="server" CssClass="txtpassword" placeholder="****************" ID="txtpassword" ForeColor="White" />
             <asp:Label Text="Email" CssClass="lblemail" runat="server" />
-            <asp:Textbox runat="server" CssClass="txtemail" placeholder="Enter Email" ID="txtemail" ForeColor="#FFD909"  />
+            <asp:Textbox runat="server" CssClass="txtemail" placeholder="example: michael@gmail.com" ID="txtemail" ForeColor="White"  />
            
-            <asp:Button Text="Sign In" CssClass="btnsubmit" runat="server" />
+           
+            <asp:Button Text="Sign In" CssClass="btnsubmit" runat="server" OnClick="Unnamed4_Click" />
+            <br />
+            <asp:Button ID="btnAccess" runat="server" CssClass="btnsubmit" Text="Share Image" OnClick="btnAccess_Click" />
+            <br />
             <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" ControlToValidate="txtemail" ErrorMessage="Invalid Email Address" ValidationExpression="\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*"></asp:RegularExpressionValidator>
             <br />
             <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ControlToValidate="txtusername" ErrorMessage="Require a Username"></asp:RequiredFieldValidator>
@@ -59,6 +71,6 @@
     </div>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         </div>
-    </div>
+        <img class="auto-style4" src="cooltext396455928968337.png" /></div>
 </body>
 </html>
