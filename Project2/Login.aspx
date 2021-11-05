@@ -43,22 +43,24 @@
         <div class="auto-style1">
     <div class="auto-style3">
         
-        &nbsp;<h2>Login/Register<img src="User_icon_2.svg.png" alt="Alternate Text" class="auto-style2" /></h2>
+        &nbsp;<h2>Register<img src="User_icon_2.svg.png" alt="Alternate Text" class="auto-style2" /></h2>
         <form runat="server">
             <br />
             <asp:Label Text="Username" CssClass="lblusername" runat="server" />
             <br />
             <asp:Textbox runat="server" CssClass="txtpassword" placeholder="example: WaterFlow123" ID="txtusername" ForeColor="White" />
             <br />
-            <asp:Label Text="Password" CssClass="lblpassword" runat="server" />
-            <asp:Textbox runat="server" CssClass="txtpassword" placeholder="****************" ID="txtpassword" ForeColor="White" />
+            <asp:Label Text="Password" CssClass="lblpassword" runat="server" TextMode ="Password" />
+            <asp:Textbox runat="server" CssClass="txtpassword" placeholder="****************" ID="txtpassword" ForeColor="White" TextMode ="Password"/>
             <asp:Label Text="Email" CssClass="lblemail" runat="server" />
             <asp:Textbox runat="server" CssClass="txtemail" placeholder="example: michael@gmail.com" ID="txtemail" ForeColor="White"  />
            
            
-            <asp:Button Text="Sign In" CssClass="btnsubmit" runat="server" OnClick="Unnamed4_Click" />
+            <asp:Button Text="Register" CssClass="btnsubmit" runat="server" OnClick="Unnamed4_Click" />
             <br />
             <asp:Button ID="btnAccess" runat="server" CssClass="btnsubmit" Text="Share Image" OnClick="btnAccess_Click" />
+            <br />
+            <asp:HyperLink ID="HyperLink1" runat="server" ForeColor="Blue" NavigateUrl="Register.aspx">Already a user?</asp:HyperLink>
             <br />
             <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" ControlToValidate="txtemail" ErrorMessage="Invalid Email Address" ValidationExpression="\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*"></asp:RegularExpressionValidator>
             <br />
@@ -72,5 +74,5 @@
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         </div>
         <img class="auto-style4" src="cooltext396455928968337.png" /></div>
-</body>
+    </body>
 </html>

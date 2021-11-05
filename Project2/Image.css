@@ -5,3 +5,47 @@
     background-size: cover;
     font-family: sans-serif;
 }
+
+
+.lbldelete, .lbladd, .lblview {
+    font-weight: bold;
+    color: #fff;
+}
+
+.container {
+    position: center;
+    width: 1200px;
+    height: 400px;
+    margin: 240px auto;
+}
+
+    .container .box {
+        position: relative;
+        width: calc(500px - 30px);
+        height: calc(550px - 30px);
+        background: #ffffff;
+        float: left;
+        margin: 15px;
+        box-sizing: border-box;
+        overflow: hidden;
+        border-radius: 10px;
+    }
+
+.txtImageTitle {
+    border-color: white;
+    box-shadow: 0 0 8px 0 ;
+}
+
+.txtCameraType {
+    border-color: white;
+    box-shadow: 0 0 8px 0 ;
+}
+
+txtImageLocation {
+    border-color: white;
+    box-shadow: 0 0 8px 0 ;
+}
+
+.btnUpload {
+    cursor: pointer;
+}
