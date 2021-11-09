@@ -123,6 +123,15 @@ namespace Project2
         protected global::System.Web.UI.WebControls.Label lblTitleData;
 
         /// <summary>
+        /// lblTest control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblTest;
+
+        /// <summary>
         /// lblImageTile control.
         /// </summary>
         /// <remarks>
@@ -186,6 +195,24 @@ namespace Project2
         protected global::System.Web.UI.WebControls.Button btnInsertData;
 
         /// <summary>
+        /// btnUpdate control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnUpdate;
+
+        /// <summary>
+        /// btnViewMetadata control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnViewMetadata;
+
+        /// <summary>
         /// lblDeleteTitle control.
         /// </summary>
         /// <remarks>
@@ -211,6 +238,15 @@ namespace Project2
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtDelete;
+
+        /// <summary>
+        /// btnDelete control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnDelete;
 
         /// <summary>
         /// lblViewTitle control.
@@ -240,13 +276,13 @@ namespace Project2
         protected global::System.Web.UI.WebControls.TextBox txtView;
 
         /// <summary>
-        /// Button1 control.
+        /// btnView control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button Button1;
+        protected global::System.Web.UI.WebControls.Button btnView;
 
         /// <summary>
         /// imgDisplay control.
