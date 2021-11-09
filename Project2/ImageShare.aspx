@@ -108,51 +108,51 @@
                         &nbsp;</td>
                 </tr>
                 <tr>
-                    <td class="auto-style9">
-                        &nbsp;</td>
-                    <td class="auto-style25">
-                        &nbsp;</td>
-                    <td class="auto-style14">
-                        &nbsp;</td>
-                </tr>
-                <tr>
-                    <td class="auto-style9">
-                        &nbsp;</td>
-                    <td class="auto-style25">
-                    <asp:Label ID="lblTitleData" runat="server" Text="Metadata" Font-Size="Large"></asp:Label>
-                    </td>
-                    <td class="auto-style14">
-                        <asp:Label ID="lblTest" runat="server"></asp:Label>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="auto-style9">
-                        &nbsp;</td>
-                    <td class="auto-style25">
-                    <asp:Label ID="lblImageTile" runat="server" Text="Image Title: "></asp:Label>
-                    </td>
-                    <td class="auto-style14">
-                    <asp:TextBox ID="txtImageTitle" runat="server" CssClass="txtCameraType"></asp:TextBox>
+                    <td class="auto-style22">
+                        </td>
+                    <td class="auto-style26">
+                        </td>
+                    <td class="auto-style24">
                         </td>
                 </tr>
                 <tr>
                     <td class="auto-style9">
                         &nbsp;</td>
                     <td class="auto-style25">
-                    <asp:Label ID="lblCamera" runat="server" Text="Camera Type:"></asp:Label>
+                    <asp:Label ID="lblTitleData" runat="server" Text="Metadata" Font-Size="Large" Visible="False"></asp:Label>
                     </td>
                     <td class="auto-style14">
-                    <asp:TextBox ID="txtCameraType" runat="server" CssClass="txtCameraType"></asp:TextBox>
+                        <asp:Label ID="lblTest" runat="server" Visible="False"></asp:Label>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="auto-style9">
+                        &nbsp;</td>
+                    <td class="auto-style25">
+                    <asp:Label ID="lblImageTile" runat="server" Text="Image Title: " Visible="False"></asp:Label>
+                    </td>
+                    <td class="auto-style14">
+                    <asp:TextBox ID="txtImageTitle" runat="server" CssClass="txtCameraType" Visible="False"></asp:TextBox>
                         </td>
                 </tr>
                 <tr>
                     <td class="auto-style9">
                         &nbsp;</td>
                     <td class="auto-style25">
-                    <asp:Label ID="lblLocation" runat="server" Text="Location Of Image:"></asp:Label>
+                    <asp:Label ID="lblCamera" runat="server" Text="Camera Type:" Visible="False"></asp:Label>
                     </td>
                     <td class="auto-style14">
-                    <asp:TextBox ID="txtImageLocation" runat="server" CssClass="txtCameraType"></asp:TextBox>
+                    <asp:TextBox ID="txtCameraType" runat="server" CssClass="txtCameraType" Visible="False"></asp:TextBox>
+                        </td>
+                </tr>
+                <tr>
+                    <td class="auto-style9">
+                        &nbsp;</td>
+                    <td class="auto-style25">
+                    <asp:Label ID="lblLocation" runat="server" Text="Location Of Image:" Visible="False"></asp:Label>
+                    </td>
+                    <td class="auto-style14">
+                    <asp:TextBox ID="txtImageLocation" runat="server" CssClass="txtCameraType" Visible="False"></asp:TextBox>
                         </td>
                 </tr>
                 <tr>
@@ -161,7 +161,9 @@
                     <td class="auto-style25">
                         &nbsp;</td>
                     <td class="auto-style14">
-                        <asp:Button ID="btnInsertData" runat="server" CssClass="btnUpload" Text="Insert data" Width="94px" OnClick="btnInsertData_Click" />
+                        <asp:Button ID="btnInsertData" runat="server" CssClass="btnUpload" Text="Insert data" Width="94px" OnClick="btnInsertData_Click" Visible="False" />
+                        <asp:Button ID="btnUpdate" runat="server" CssClass="btnUpload" OnClick="btnUpdate_Click" Text="Update" Width="94px" Visible="False" />
+                        <asp:Button ID="btnViewMetadata" runat="server" CssClass="btnUpload" OnClick="btnViewMetadata_Click" Text="View" Width="94px" Visible="False" />
                     </td>
                 </tr>
                 <tr>
@@ -176,7 +178,7 @@
                     <td class="auto-style9">
                         &nbsp;</td>
                     <td class="auto-style25">
-                        <asp:Label ID="lblDeleteTitle" runat="server" Font-Bold="True" Font-Size="X-Large" Text="Delete Photo"></asp:Label>
+                        <asp:Label ID="lblDeleteTitle" runat="server" Font-Bold="True" Font-Size="X-Large" Text="Delete Photo" Visible="False"></asp:Label>
                     </td>
                     <td class="auto-style14">
                         &nbsp;</td>
@@ -185,10 +187,13 @@
                     <td class="auto-style9">
                         &nbsp;</td>
                     <td class="auto-style25">
-                        <asp:Label ID="lblSearchTitle" runat="server" Font-Size="Large" Text="Search By Image Title:"></asp:Label>
+                        <asp:Label ID="lblSearchTitle" runat="server" Font-Size="Large" Text="Search By Image Title:" Visible="False"></asp:Label>
                     </td>
                     <td class="auto-style14">
-                        <asp:TextBox ID="txtDelete" runat="server" CssClass="txtCameraType"></asp:TextBox>
+                        <asp:TextBox ID="txtDelete" runat="server" CssClass="txtCameraType" Visible="False"></asp:TextBox>
+                        <br />
+                        <br />
+                        <asp:Button ID="btnDelete" runat="server" CssClass="btnUpload" OnClick="btnDelete_Click" Text="Delete" Width="94px" Visible="False" />
                         </td>
                 </tr>
                 <tr>
@@ -203,7 +208,7 @@
                     <td class="auto-style22">
                         &nbsp;</td>
                     <td class="auto-style26">
-                        <asp:Label ID="lblViewTitle" runat="server" Font-Bold="True" Font-Size="X-Large" Text="View Photo"></asp:Label>
+                        <asp:Label ID="lblViewTitle" runat="server" Font-Bold="True" Font-Size="X-Large" Text="View Photo" Visible="False"></asp:Label>
                     </td>
                     <td class="auto-style24">
                         &nbsp;</td>
@@ -212,10 +217,13 @@
                     <td class="auto-style22">
                         &nbsp;</td>
                     <td class="auto-style26">
-                        <asp:Label ID="lblView" runat="server" Font-Size="Large" Text="View Photo:"></asp:Label>
+                        <asp:Label ID="lblView" runat="server" Font-Size="Large" Text="Image Title:" Visible="False"></asp:Label>
                     </td>
                     <td class="auto-style24">
-                        <asp:TextBox ID="txtView" runat="server" CssClass="txtCameraType"></asp:TextBox>
+                        <asp:TextBox ID="txtView" runat="server" CssClass="txtCameraType" Visible="False"></asp:TextBox>
+                        <br />
+                        <br />
+                        <asp:Button ID="btnView" runat="server" CssClass="btnUpload" OnClick="btnView_Click" Text="View" Width="94px" Visible="False" />
                     </td>
                 </tr>
                 <tr>
@@ -248,7 +256,7 @@
             <br />
         </div>
         <p>
-            &nbsp;</p>
+            &nbsp;&nbsp;</p>
         <asp:Image ID="imgDisplay" runat="server" />
     </form>
 </body>

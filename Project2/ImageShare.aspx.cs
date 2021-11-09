@@ -17,6 +17,7 @@ namespace Project2
 {
     public partial class ImageShare : System.Web.UI.Page
     {
+        public SqlDataAdapter adapter;
         string email;
         string username;
         string UserID;
@@ -24,6 +25,10 @@ namespace Project2
         bool DataInserted = false;
         string sql;
         int imageID;
+        string ImageTitle;
+        string delete_member;
+        string CameraType;
+        string ImageLocation;
         string insert_query;    
         string constr = @"Server = tcp:323projectserver.database.windows.net,1433;Initial Catalog = Users; Persist Security Info=False;User ID = projectadmin; Password=Slimkop21%; MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout = 30;";
         public SqlConnection con;
@@ -44,28 +49,6 @@ namespace Project2
                 lblUsername.Text = username;
         
             }
-
-            imgDisplay.Visible = false;
-            lblCamera.Visible = false;
-            lblImageTile.Visible = false;
-            lblLocation.Visible = false;
-            lblTitleData.Visible = false;
-            btnInsertData.Visible = false;
-            txtCameraType.Visible = false;
-            txtImageLocation.Visible = false;
-            txtImageTitle.Visible = false;
-            lblDeleteTitle.Visible = false;
-            lblSearchTitle.Visible = false;
-            txtDelete.Visible = false;
-            lblViewTitle.Visible = false;
-            lblView.Visible = false;
-            txtView.Visible = false;
-            
-            
-
-
-
-
         }
 
         private void ImageUpload()
@@ -99,9 +82,7 @@ namespace Project2
                     cmd.Parameters.AddWithValue("@UserID", UserID);
                     sda.SelectCommand = cmd;
                     sda.Fill(ds, "Users");
-                    con.Close();
-                    
-
+                    con.Close();                   
                 }
                 imageInserted = true;
             }
@@ -128,7 +109,9 @@ namespace Project2
 
         protected void Button1_Click(object sender, EventArgs e)
         {
+            
             ImageUpload();
+            
             if (imageInserted == true)
             {
                 imgDisplay.Visible = true;
@@ -140,12 +123,50 @@ namespace Project2
                 txtCameraType.Visible = true;
                 txtImageLocation.Visible = true;
                 txtImageTitle.Visible = true;
-                txtView.Visible = true;
+                txtView.Visible = false;
                 txtDelete.Visible = false;
+                btnView.Visible = true;
+                btnViewMetadata.Visible = true;
+                btnUpdate.Visible = true;
+                btnDelete.Visible = true;
+                
                 
             }
             txtDelete.Visible = false;
-
+            imgDisplay.Visible = true;
+            lblCamera.Visible = true;
+            lblImageTile.Visible = true;
+            lblLocation.Visible = true;
+            lblTitleData.Visible = true;
+            btnInsertData.Visible = true;
+            txtCameraType.Visible = true;
+            txtImageLocation.Visible = true;
+            txtImageTitle.Visible = true;
+            txtView.Visible = false;
+            txtDelete.Visible = false;
+            
+            btnViewMetadata.Visible = true;
+            btnUpdate.Visible = true;
+            lblDeleteTitle.Visible = true;
+            lblSearchTitle.Visible = true;
+            txtDelete.Visible = true;
+            lblViewTitle.Visible = true;
+            lblView.Visible = true;
+            txtView.Visible = true;
+            lblCamera.Visible = true;
+            lblImageTile.Visible = true;
+            lblLocation.Visible = true;
+            lblTitleData.Visible = true;
+            btnInsertData.Visible = true;
+            txtCameraType.Visible = true;
+            txtImageLocation.Visible = true;
+            txtImageTitle.Visible = true;
+            lblDeleteTitle.Visible = true;
+            lblSearchTitle.Visible = true;
+            txtDelete.Visible = true;
+            lblViewTitle.Visible = true;
+            lblView.Visible = true;
+            txtView.Visible = true;
         }
 
         protected void btnInsertData_Click(object sender, EventArgs e)
@@ -229,6 +250,7 @@ namespace Project2
             {
                 SqlCommand comm;
                 con = new SqlConnection(constr);
+                sda = new SqlDataAdapter();
                 con.Open();             
                 string view_Image = @"SELECT Image FROM Images, Metadata WHERE ImageTitle='" + txtView.Text + "'";
                 comm = new SqlCommand(view_Image, con);
@@ -236,6 +258,137 @@ namespace Project2
                 comm.ExecuteNonQuery();
                 con.Close();
            
+            }
+
+            catch (Exception ex)
+            {
+                Response.Write("<script>alert('Photo doesn't exist...')</script>" + ex.Message);
+            }
+        }
+
+        protected void btnDelete_Click(object sender, EventArgs e)
+        {
+           try
+           {
+                SqlCommand comm;
+                con = new SqlConnection(constr);
+                adapter = new SqlDataAdapter();
+                ds = new DataSet();
+                con.Open();
+                string view_Image = @"DELETE FROM Metadata WHERE ImageTitle='" + txtView.Text + "'";
+                comm = new SqlCommand(view_Image, con);
+                comm.ExecuteNonQuery();
+                con.Close();
+
+    
+                 sda = new SqlDataAdapter();
+                con.Open();
+
+                sql = "SELECT ImageID FROM Metadata WHERE ImageTitle='" + txtView.Text + "'";
+                comm = new SqlCommand(sql, con);
+                sda.SelectCommand = comm;
+                delete_member = (string)comm.ExecuteScalar();
+                con.Close();
+
+                con.Open();
+                string delete_image = @"DELETE FROM Images WHERE ImageID='" + delete_member + "'";
+                comm = new SqlCommand(view_Image, con);
+                comm.ExecuteNonQuery();
+                con.Close();
+                Response.Write("<script>alert('Photo and metadata deleted')</script>");
+
+            }
+
+            catch (Exception ex)
+             {
+             Response.Write("<script>alert('Photo doesn't exist...')</script>" + ex.Message);
+            }
+        }
+
+        protected void btnView_Click(object sender, EventArgs e)
+        {
+            //try
+            //{
+                SqlCommand com;
+                con = new SqlConnection(constr);
+                sda = new SqlDataAdapter();
+                con.Open();
+                string view_Image = @"SELECT Image FROM Images, Metadata WHERE ImageTitle='" + txtView.Text + "'";
+                com = new SqlCommand(view_Image, con);
+                SqlDataReader dr = com.ExecuteReader();
+                byte[] imagem = (byte[])(dr["IMG"]);
+                string photo = Convert.ToBase64String(imagem);
+                imgDisplay.ImageUrl = string.Format("data:image/jpg;base64,{0}", photo);
+                dr.Read();
+                sda.SelectCommand = com;
+                //com.ExecuteNonQuery();
+                imgDisplay.ImageUrl = view_Image;
+                con.Close();
+
+
+            //}
+
+            //catch (Exception ex)
+            //{
+            //   Response.Write("<script>alert('Photo doesn't exist...')</script>" + ex.Message);
+            // }
+        }
+
+        protected void btnUpdate_Click(object sender, EventArgs e)
+        {
+            try
+            {           
+                SqlCommand comm;
+                con = new SqlConnection(constr);
+                con.Open();
+               
+                sql = "UPDATE Metadata SET CameraType = '" + txtCameraType.Text + "' ,Location_Of_Image = '" + txtImageLocation.Text + "'  WHERE UserID ='" + lblUserID.Text + "'";
+                comm = new SqlCommand(sql, con);
+                sda.SelectCommand = comm;
+                comm.ExecuteNonQuery();
+                con.Close();
+
+            }
+
+            catch (Exception ex)
+            {
+                Response.Write("<script>alert('Photo doesn't exist...')</script>" + ex.Message);
+            }
+            
+        }
+
+        protected void btnViewMetadata_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                SqlCommand com;
+                con = new SqlConnection(constr);
+                sda = new SqlDataAdapter();
+                ds = new DataSet();
+                con.Open();
+                sql = "SELECT ImageTitle FROM Metadata, Users WHERE UserID='" + lblUserID.Text + "'";
+                com = new SqlCommand(sql, con);
+                sda.SelectCommand = com;
+                ImageTitle = (string)com.ExecuteScalar();
+                txtImageTitle.Text = ImageTitle;
+                con.Close();
+
+                con.Open();
+                sql = "SELECT CameraType FROM Metadata, Users WHERE UserID='" + lblUserID.Text + "'";
+                com = new SqlCommand(sql, con);
+                sda.SelectCommand = com;
+                CameraType = (string)com.ExecuteScalar();
+                txtCameraType.Text = CameraType;
+                con.Close();
+
+                con.Open();
+                sql = "SELECT Location_Of_Image FROM Metadata, Users WHERE UserID='" + lblUserID.Text + "'";
+                com = new SqlCommand(sql, con);
+                sda.SelectCommand = com;
+                ImageLocation = (string)com.ExecuteScalar();
+                txtImageLocation.Text = ImageLocation;
+                con.Close();
+
             }
 
             catch (Exception ex)
