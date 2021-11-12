@@ -132,6 +132,49 @@ namespace Project2
                 Response.Write("<script>alert('Error...')</script>" + ex.Message);
             }
         }
-    
+
+        protected void btnAccess_Click(object sender, EventArgs e)
+        {
+            //Determine if the account already exists
+            try
+            {
+                SqlCommand cmd;
+                con = new SqlConnection(constr);
+                sda = new SqlDataAdapter();
+                ds = new DataSet();
+                con.Open();
+                sql = @"SELECT * FROM Users WHERE Username='" + txtusername.Text + "' and Password='" + EncryptedString(txtpassword.Text) + "'";
+                cmd = new SqlCommand(sql, con);
+                sda.SelectCommand = cmd;
+                sda.Fill(ds, "Users");
+                con.Close();
+                if (ds.Tables[0].Rows.Count > 0)
+                {
+                    Response.Redirect("ImageShare.aspx");
+
+                }
+                else
+                {
+                    Response.Redirect("Login.aspx");
+                    Response.Write("<script>alert('You don't have an account')</script>");
+                }
+                con = new SqlConnection(constr);
+                sda = new SqlDataAdapter();
+                ds = new DataSet();
+                con.Open();
+                sql = @"SELECT UserID FROM Users WHERE Username='" + txtusername.Text + "' and Password='" + EncryptedString(txtpassword.Text) + "'";
+                cmd = new SqlCommand(sql, con);
+                sda.SelectCommand = cmd;
+                sda.Fill(ds, "Users");
+                con.Close();
+                password = txtpassword.Text;
+                username = txtusername.Text;
+                Response.Redirect("ImageAccess.aspx");
+            }
+            catch (Exception ex)
+            {
+                Response.Write("<script>alert('Error...')</script>" + ex.Message);
+            }
+        }
     }
 }

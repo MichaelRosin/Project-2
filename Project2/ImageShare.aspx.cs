@@ -25,8 +25,10 @@ namespace Project2
         bool DataInserted = false;
         string sql;
         int imageID;
+        int SelectedimageID;
         string ImageTitle;
-        string delete_member;
+        int delete_member;
+        int Update;
         string CameraType;
         string ImageLocation;
         string insert_query;    
@@ -37,7 +39,7 @@ namespace Project2
         protected void Page_Load(object sender, EventArgs e)
         {
 
-
+            
             HttpCookie cookie = Request.Cookies["UserInfo"];
 
             if (cookie != null)
@@ -51,10 +53,53 @@ namespace Project2
             }
         }
 
+        private void ViewDataGrid()
+        {
+            con = new SqlConnection(constr);
+            sda = new SqlDataAdapter();
+            con.Open();
+            SqlCommand comm = new SqlCommand("SELECT * FROM IMAGES WHERE UserID='" + lblUserID.Text + "'", con);
+            SqlDataReader dr = comm.ExecuteReader();
+            GridView1.DataSource = dr;
+            GridView1.DataBind();
+            con.Close();
+        }
+
+        protected void ViewPhoto(int ImageID)
+        {
+
+
+            try
+            {
+                con = new SqlConnection(constr);
+                sda = new SqlDataAdapter();
+                con.Open();
+                SqlCommand comm = new SqlCommand("SELECT Image FROM IMAGES WHERE ImageID= @ImageID", con);
+                comm.Parameters.AddWithValue("@ImageID", ImageID);
+                byte[] bytes = (byte[])comm.ExecuteScalar();
+                string strBase64 = Convert.ToBase64String(bytes);
+                imgDisplay.ImageUrl = "data:Image/png;base64," + strBase64;
+                SqlDataAdapter da = new SqlDataAdapter();
+                da.SelectCommand = comm;
+                comm.ExecuteNonQuery();
+                con.Close();
+               imgDisplay.Visible = true;
+           } 
+              catch (Exception ex)
+           {
+                Response.Write("<script>alert('Error...')</script>" + ex.Message);
+           }
+
+           
+
+
+
+        }
+
         private void ImageUpload()
         {
             
-            try
+           try
             {
                 HttpCookie cookie = Request.Cookies["UserInfo"];
 
@@ -85,11 +130,11 @@ namespace Project2
                     con.Close();                   
                 }
                 imageInserted = true;
-            }
+           }
             catch (Exception ex)
-            {
-                Response.Write("<script>alert('Error...')</script>" + ex.Message);
-            }
+           {
+               Response.Write("<script>alert('Error...')</script>" + ex.Message);
+           }
 
     
            
@@ -123,10 +168,7 @@ namespace Project2
                 txtCameraType.Visible = true;
                 txtImageLocation.Visible = true;
                 txtImageTitle.Visible = true;
-                txtView.Visible = false;
                 txtDelete.Visible = false;
-                btnView.Visible = true;
-                btnViewMetadata.Visible = true;
                 btnUpdate.Visible = true;
                 btnDelete.Visible = true;
                 
@@ -142,17 +184,13 @@ namespace Project2
             txtCameraType.Visible = true;
             txtImageLocation.Visible = true;
             txtImageTitle.Visible = true;
-            txtView.Visible = false;
             txtDelete.Visible = false;
             
-            btnViewMetadata.Visible = true;
             btnUpdate.Visible = true;
             lblDeleteTitle.Visible = true;
             lblSearchTitle.Visible = true;
             txtDelete.Visible = true;
             lblViewTitle.Visible = true;
-            lblView.Visible = true;
-            txtView.Visible = true;
             lblCamera.Visible = true;
             lblImageTile.Visible = true;
             lblLocation.Visible = true;
@@ -165,8 +203,21 @@ namespace Project2
             lblSearchTitle.Visible = true;
             txtDelete.Visible = true;
             lblViewTitle.Visible = true;
-            lblView.Visible = true;
-            txtView.Visible = true;
+            btnDeleteData.Visible = true;
+            GridView1.Visible = true;
+            lbl1.Visible = true;
+            lbl2.Visible = true;
+            lbl3.Visible = true;
+            lblMTitle.Visible = true;
+            lblCType.Visible = true;
+            lblLImage.Visible = true;
+            txtuserAccess.Visible = true;
+            btnPermission.Visible = true;
+            lblUserAccess.Visible = true;
+
+
+
+            ViewDataGrid();
         }
 
         protected void btnInsertData_Click(object sender, EventArgs e)
@@ -184,7 +235,7 @@ namespace Project2
                 imageID = (int)com.ExecuteScalar();
               
                
-            }
+           }
             catch (Exception ex)
             {
                 Response.Write("<script>alert('Error...')</script>" + ex.Message);
@@ -220,8 +271,6 @@ namespace Project2
                 lblSearchTitle.Visible = true;
                 txtDelete.Visible = true;
                 lblViewTitle.Visible = true;
-                lblView.Visible = true;
-                txtView.Visible = true;
                 lblCamera.Visible = true;
                 lblImageTile.Visible = true;
                 lblLocation.Visible = true;
@@ -234,8 +283,6 @@ namespace Project2
                 lblSearchTitle.Visible = true;
                 txtDelete.Visible = true;
                 lblViewTitle.Visible = true;
-                lblView.Visible = true;
-                txtView.Visible = true;
             }
         }
 
@@ -246,24 +293,7 @@ namespace Project2
 
         protected void Button1_Click1(object sender, EventArgs e)
         {
-            try
-            {
-                SqlCommand comm;
-                con = new SqlConnection(constr);
-                sda = new SqlDataAdapter();
-                con.Open();             
-                string view_Image = @"SELECT Image FROM Images, Metadata WHERE ImageTitle='" + txtView.Text + "'";
-                comm = new SqlCommand(view_Image, con);
-                sda.SelectCommand = comm;
-                comm.ExecuteNonQuery();
-                con.Close();
-           
-            }
-
-            catch (Exception ex)
-            {
-                Response.Write("<script>alert('Photo doesn't exist...')</script>" + ex.Message);
-            }
+            
         }
 
         protected void btnDelete_Click(object sender, EventArgs e)
@@ -275,19 +305,18 @@ namespace Project2
                 adapter = new SqlDataAdapter();
                 ds = new DataSet();
                 con.Open();
-                string view_Image = @"DELETE FROM Metadata WHERE ImageTitle='" + txtView.Text + "'";
+                string view_Image = @"DELETE FROM Metadata WHERE ImageTitle='" + txtDelete.Text + "'";
                 comm = new SqlCommand(view_Image, con);
                 comm.ExecuteNonQuery();
                 con.Close();
 
     
-                 sda = new SqlDataAdapter();
+                sda = new SqlDataAdapter();
                 con.Open();
-
-                sql = "SELECT ImageID FROM Metadata WHERE ImageTitle='" + txtView.Text + "'";
+                sql = "SELECT ImageID FROM Metadata WHERE ImageTitle='" + txtDelete.Text + "'";
                 comm = new SqlCommand(sql, con);
                 sda.SelectCommand = comm;
-                delete_member = (string)comm.ExecuteScalar();
+                delete_member = (int)comm.ExecuteScalar();
                 con.Close();
 
                 con.Open();
@@ -307,42 +336,28 @@ namespace Project2
 
         protected void btnView_Click(object sender, EventArgs e)
         {
-            //try
-            //{
-                SqlCommand com;
-                con = new SqlConnection(constr);
-                sda = new SqlDataAdapter();
-                con.Open();
-                string view_Image = @"SELECT Image FROM Images, Metadata WHERE ImageTitle='" + txtView.Text + "'";
-                com = new SqlCommand(view_Image, con);
-                SqlDataReader dr = com.ExecuteReader();
-                byte[] imagem = (byte[])(dr["IMG"]);
-                string photo = Convert.ToBase64String(imagem);
-                imgDisplay.ImageUrl = string.Format("data:image/jpg;base64,{0}", photo);
-                dr.Read();
-                sda.SelectCommand = com;
-                //com.ExecuteNonQuery();
-                imgDisplay.ImageUrl = view_Image;
-                con.Close();
-
-
-            //}
-
-            //catch (Exception ex)
-            //{
-            //   Response.Write("<script>alert('Photo doesn't exist...')</script>" + ex.Message);
-            // }
+        
         }
 
         protected void btnUpdate_Click(object sender, EventArgs e)
         {
             try
-            {           
+            {
+                con = new SqlConnection(constr);
                 SqlCommand comm;
+                sda = new SqlDataAdapter();
+                con.Open();
+                sql = "SELECT ImageID FROM Metadata WHERE ImageTitle='" + txtImageTitle.Text + "'";
+                comm = new SqlCommand(sql, con);
+                sda.SelectCommand = comm;
+                Update = (int)comm.ExecuteScalar();
+                con.Close();
+
+
                 con = new SqlConnection(constr);
                 con.Open();
-               
-                sql = "UPDATE Metadata SET CameraType = '" + txtCameraType.Text + "' ,Location_Of_Image = '" + txtImageLocation.Text + "'  WHERE UserID ='" + lblUserID.Text + "'";
+                sda = new SqlDataAdapter();
+                sql = "UPDATE Metadata SET CameraType = '" + txtCameraType.Text + "' ,Location_Of_Image = '" + txtImageLocation.Text + "'  WHERE ImageID ='" + Update+ "'";
                 comm = new SqlCommand(sql, con);
                 sda.SelectCommand = comm;
                 comm.ExecuteNonQuery();
@@ -352,12 +367,46 @@ namespace Project2
 
             catch (Exception ex)
             {
-                Response.Write("<script>alert('Photo doesn't exist...')</script>" + ex.Message);
+               Response.Write("<script>alert('Photo doesn't exist...')</script>" + ex.Message);
             }
             
         }
 
         protected void btnViewMetadata_Click(object sender, EventArgs e)
+        {
+          
+        }
+
+        protected void btnDeleteData_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                SqlCommand comm;
+                con = new SqlConnection(constr);
+                adapter = new SqlDataAdapter();
+                ds = new DataSet();
+                con.Open();
+                string view_Image = @"DELETE FROM Metadata WHERE ImageTitle='" + txtImageTitle.Text + "'";
+                comm = new SqlCommand(view_Image, con);
+                comm.ExecuteNonQuery();
+                con.Close();
+            }
+
+            catch (Exception ex)
+            {
+                Response.Write("<script>alert('Photo doesn't exist...')</script>" + ex.Message);
+            }
+        }
+
+        protected void GridView1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            SelectedimageID = Int32.Parse(GridView1.SelectedRow.Cells[1].Text);
+            ViewPhoto(SelectedimageID);
+            ViewMetaData(SelectedimageID);
+
+        }
+
+        private void ViewMetaData(int ImgID)
         {
             try
             {
@@ -365,36 +414,117 @@ namespace Project2
                 con = new SqlConnection(constr);
                 sda = new SqlDataAdapter();
                 ds = new DataSet();
+                sda = new SqlDataAdapter();
+
                 con.Open();
-                sql = "SELECT ImageTitle FROM Metadata, Users WHERE UserID='" + lblUserID.Text + "'";
+                sql = "SELECT ImageTitle FROM Metadata WHERE ImageID = '" + ImgID + "'";
                 com = new SqlCommand(sql, con);
                 sda.SelectCommand = com;
                 ImageTitle = (string)com.ExecuteScalar();
-                txtImageTitle.Text = ImageTitle;
+                lblMTitle.Text = ImageTitle;
                 con.Close();
 
                 con.Open();
-                sql = "SELECT CameraType FROM Metadata, Users WHERE UserID='" + lblUserID.Text + "'";
+                sql = "SELECT CameraType FROM Metadata WHERE ImageID = '" + ImgID + "'";
                 com = new SqlCommand(sql, con);
                 sda.SelectCommand = com;
                 CameraType = (string)com.ExecuteScalar();
-                txtCameraType.Text = CameraType;
+                lblCType.Text = CameraType;
                 con.Close();
 
                 con.Open();
-                sql = "SELECT Location_Of_Image FROM Metadata, Users WHERE UserID='" + lblUserID.Text + "'";
+                sql = "SELECT Location_Of_Image FROM Metadata WHERE ImageID = '" + ImgID + "'";
                 com = new SqlCommand(sql, con);
                 sda.SelectCommand = com;
                 ImageLocation = (string)com.ExecuteScalar();
-                txtImageLocation.Text = ImageLocation;
+                lblLImage.Text = ImageLocation;
                 con.Close();
-
             }
-
             catch (Exception ex)
             {
                 Response.Write("<script>alert('Photo doesn't exist...')</script>" + ex.Message);
             }
+        }
+
+        protected void btnViewMData_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                SqlCommand com;
+                con = new SqlConnection(constr);
+                sda = new SqlDataAdapter();
+                ds = new DataSet();
+                sda = new SqlDataAdapter();
+                
+                con.Open();
+                sql = "SELECT ImageTitle FROM Metadata WHERE ImageID = '" + SelectedimageID + "'";
+                com = new SqlCommand(sql, con);
+                sda.SelectCommand = com;
+                ImageTitle = (string)com.ExecuteScalar();
+                lblMTitle.Text = ImageTitle;
+                con.Close();
+
+                con.Open();
+                sql = "SELECT CameraType FROM Metadata WHERE ImageID = '" + SelectedimageID + "'";
+                com = new SqlCommand(sql, con);
+                sda.SelectCommand = com;
+                CameraType = (string)com.ExecuteScalar();
+                lblCType.Text = CameraType;
+                con.Close();
+
+                con.Open();
+                sql = "SELECT Location_Of_Image FROM Metadata WHERE ImageID = '" + SelectedimageID + "'";
+                com = new SqlCommand(sql, con);
+                sda.SelectCommand = com;
+                ImageLocation = (string)com.ExecuteScalar();
+                lblLImage.Text = ImageLocation;
+                con.Close();
+            }
+            catch (Exception ex)
+            {
+                Response.Write("<script>alert('Photo doesn't exist...')</script>" + ex.Message);
+            }
+        }
+
+        protected void btnPermission_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (txtuserAccess.Text != "")
+                {
+
+                    con = new SqlConnection(constr);
+                    SqlCommand comm;
+                    sda = new SqlDataAdapter();
+                    con.Open();
+                    sql = "SELECT Top (1)  ImageID FROM Images";
+                    comm = new SqlCommand(sql, con);
+                    sda.SelectCommand = comm;
+                    Update = (int)comm.ExecuteScalar();
+                    con.Close();
+
+                    con = new SqlConnection(constr);
+                    con.Open();
+                    string insert_query = @"INSERT INTO UserAccess VALUES(@UserID, @ImageID, @Access)";
+                    comm = new SqlCommand(insert_query, con);
+                    comm.Parameters.AddWithValue("@UserID", txtuserAccess.Text);
+                    comm.Parameters.AddWithValue("@ImageID", Update);
+                    comm.Parameters.AddWithValue("@Access", 1);
+                    comm.ExecuteNonQuery();
+                    con.Close();
+
+                }
+                else
+                {
+                    Response.Write("<script>alert('Insert UserID')</script>");
+                }
+
+            }
+            catch (Exception ex)
+            {
+                Response.Write("<script>alert('User doesn't exist...')</script>" + ex.Message);
+            }
+           
         }
     }
 }

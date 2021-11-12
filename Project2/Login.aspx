@@ -58,8 +58,6 @@
            
             <asp:Button Text="Register" CssClass="btnsubmit" runat="server" OnClick="Unnamed4_Click" />
             <br />
-            <asp:Button ID="btnAccess" runat="server" CssClass="btnsubmit" Text="Share Image" OnClick="btnAccess_Click" />
-            <br />
             <asp:HyperLink ID="HyperLink1" runat="server" ForeColor="Blue" NavigateUrl="Register.aspx">Already a user?</asp:HyperLink>
             <br />
             <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" ControlToValidate="txtemail" ErrorMessage="Invalid Email Address" ValidationExpression="\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*"></asp:RegularExpressionValidator>

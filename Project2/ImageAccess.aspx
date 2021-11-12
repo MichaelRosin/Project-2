@@ -7,48 +7,130 @@
     <title></title>
     <link href="Access.css" rel="stylesheet" />
     <style type="text/css">
-        .auto-style1 {
-            width: 348px;
-            height: 172px;
+        .auto-style2 {
+            width: 224px;
+        }
+        .auto-style4 {
+            width: 279px;
+        }
+        .auto-style5 {
+            width: 100%;
+        }
+        .auto-style6 {
+            width: 279px;
+            height: 22px;
+        }
+        .auto-style7 {
+            width: 224px;
+            height: 22px;
+        }
+        .auto-style8 {
+            height: 22px;
         }
     </style>
 </head>
 <body>
     <form id="form1" runat="server">
-    <div class="container">
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <div class="box" style="left: 242px; top: -1px; width: 350px; height: 373px">
-            <br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <asp:Label ID="Label1" runat="server" CssClass="lblview" Text="View Image"></asp:Label>
-            <br />
-            <img alt="" class="auto-style1" src="" /><asp:Label ID="Label3" runat="server" Text="Image Title:"></asp:Label>
-&nbsp;<asp:TextBox ID="TextBox1" runat="server" Height="16px"></asp:TextBox>
-        </div>
-        <div class="box" style="left: 253px; top: -1px; width: 362px; height: 373px">
-            <br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <asp:Label ID="Label2" runat="server" CssClass="lblview" Text="View Metadata"></asp:Label>
-            <br />
-            <br />
-            <asp:Label ID="Label4" runat="server" CssClass="lblview" Text="Image ID:"></asp:Label>
-            <asp:Label ID="Label9" runat="server" Text="Label"></asp:Label>
-            <br />
-            <br />
-            <asp:Label ID="Label5" runat="server" CssClass="lblview" Text="Camera Type:"></asp:Label>
-            <asp:Label ID="Label6" runat="server" Text="Label"></asp:Label>
-            <br />
-            <br />
-            <asp:Label ID="Label7" runat="server" CssClass="lblview" Text="Location of photo:"></asp:Label>
-            <asp:Label ID="Label8" runat="server" Text="Label"></asp:Label>
-            <br />
-            <br />
-            <asp:Label ID="Label10" runat="server" CssClass="lblview" Text="Image Title:"></asp:Label>
-            <asp:Label ID="Label11" runat="server" Text="Label"></asp:Label>
-        </div>
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <div>
         <br />
-        <br />
+        <table class="auto-style5">
+            <tr>
+                <td class="auto-style4">&nbsp;</td>
+                <td class="auto-style2">
+                    <asp:Label ID="Label1" runat="server" Font-Bold="True" Font-Size="Large" Text="View Image"></asp:Label>
+                    <br />
+                </td>
+                <td>&nbsp;</td>
+            </tr>
+            <tr>
+                <td class="auto-style4">&nbsp;</td>
+                <td class="auto-style2">
+                    <asp:GridView ID="GridView1" runat="server" AutoGenerateSelectButton="True" OnSelectedIndexChanged="GridView1_SelectedIndexChanged">
+                    </asp:GridView>
+                </td>
+                <td>
+                    <asp:Label ID="Label6" runat="server" Text="Enter UserID:"></asp:Label>
+                    <asp:TextBox ID="txtUserID" runat="server"></asp:TextBox>
+&nbsp;<asp:Button ID="btnSubmit" runat="server" OnClick="btnSubmit_Click" Text="Submit" />
+                </td>
+            </tr>
+            <tr>
+                <td class="auto-style4">&nbsp;</td>
+                <td class="auto-style2">
+                    <asp:Image ID="imgDisplay" runat="server" />
+                </td>
+                <td>&nbsp;</td>
+            </tr>
+            <tr>
+                <td class="auto-style4">&nbsp;</td>
+                <td class="auto-style2">
+                    <asp:Label ID="Label2" runat="server" Font-Bold="True" Font-Size="Large" Text="Metadata"></asp:Label>
+                </td>
+                <td>&nbsp;</td>
+            </tr>
+            <tr>
+                <td class="auto-style4">&nbsp;</td>
+                <td class="auto-style2">
+                    <asp:Label ID="Label3" runat="server" Text="Image Title:"></asp:Label>
+                </td>
+                <td>
+                    <asp:Label ID="lblImageTitle" runat="server"></asp:Label>
+                </td>
+            </tr>
+            <tr>
+                <td class="auto-style4">&nbsp;</td>
+                <td class="auto-style2">
+                    <asp:Label ID="Label4" runat="server" Text="Camera Type:"></asp:Label>
+                </td>
+                <td>
+                    <asp:Label ID="lblCameraType" runat="server"></asp:Label>
+                </td>
+            </tr>
+            <tr>
+                <td class="auto-style4">&nbsp;</td>
+                <td class="auto-style2">
+                    <asp:Label ID="Label5" runat="server" Text="Location of Image:"></asp:Label>
+                </td>
+                <td>
+                    <asp:Label ID="lblLocation" runat="server"></asp:Label>
+                </td>
+            </tr>
+            <tr>
+                <td class="auto-style6"></td>
+                <td class="auto-style7"></td>
+                <td class="auto-style8"></td>
+            </tr>
+            <tr>
+                <td class="auto-style4">&nbsp;</td>
+                <td class="auto-style2">&nbsp;</td>
+                <td>&nbsp;</td>
+            </tr>
+            <tr>
+                <td class="auto-style4">&nbsp;</td>
+                <td class="auto-style2">&nbsp;</td>
+                <td>&nbsp;</td>
+            </tr>
+            <tr>
+                <td class="auto-style4">&nbsp;</td>
+                <td class="auto-style2">&nbsp;</td>
+                <td>&nbsp;</td>
+            </tr>
+            <tr>
+                <td class="auto-style4">&nbsp;</td>
+                <td class="auto-style2">&nbsp;</td>
+                <td>&nbsp;</td>
+            </tr>
+            <tr>
+                <td class="auto-style4">&nbsp;</td>
+                <td class="auto-style2">&nbsp;</td>
+                <td>&nbsp;</td>
+            </tr>
+            <tr>
+                <td class="auto-style4">&nbsp;</td>
+                <td class="auto-style2">&nbsp;</td>
+                <td>&nbsp;</td>
+            </tr>
+        </table>
         <br />
 
     </div>

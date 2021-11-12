@@ -32,7 +32,19 @@
             width: 56px;
             height: 22px;
         }
-    </style>
+        .auto-style27 {
+            width: 152px;
+            height: 88px;
+        }
+        .auto-style28 {
+            width: 56px;
+            height: 88px;
+        }
+        .auto-style29 {
+            width: 255px;
+            height: 88px;
+        }
+        </style>
 </head>
 <body>
   
@@ -100,12 +112,15 @@
                         </td>
                 </tr>
                 <tr>
-                    <td class="auto-style9">
-                        &nbsp;</td>
-                    <td class="auto-style25">
-                        &nbsp;</td>
-                    <td class="auto-style14">
-                        &nbsp;</td>
+                    <td class="auto-style22">
+                        </td>
+                    <td class="auto-style26">
+                        <asp:Label ID="lblUserAccess" runat="server" Text="Give UserID access:" Visible="False"></asp:Label>
+                    </td>
+                    <td class="auto-style24">
+                        <asp:TextBox ID="txtuserAccess" runat="server" Visible="False"></asp:TextBox>
+&nbsp;<asp:Button ID="btnPermission" runat="server" CssClass="btnUpload" OnClick="btnPermission_Click" Text="Grant Permission" Visible="False" />
+                    </td>
                 </tr>
                 <tr>
                     <td class="auto-style22">
@@ -122,8 +137,7 @@
                     <asp:Label ID="lblTitleData" runat="server" Text="Metadata" Font-Size="Large" Visible="False"></asp:Label>
                     </td>
                     <td class="auto-style14">
-                        <asp:Label ID="lblTest" runat="server" Visible="False"></asp:Label>
-                    </td>
+                        &nbsp;</td>
                 </tr>
                 <tr>
                     <td class="auto-style9">
@@ -163,7 +177,7 @@
                     <td class="auto-style14">
                         <asp:Button ID="btnInsertData" runat="server" CssClass="btnUpload" Text="Insert data" Width="94px" OnClick="btnInsertData_Click" Visible="False" />
                         <asp:Button ID="btnUpdate" runat="server" CssClass="btnUpload" OnClick="btnUpdate_Click" Text="Update" Width="94px" Visible="False" />
-                        <asp:Button ID="btnViewMetadata" runat="server" CssClass="btnUpload" OnClick="btnViewMetadata_Click" Text="View" Width="94px" Visible="False" />
+                        <asp:Button ID="btnDeleteData" runat="server" CssClass="btnUpload" OnClick="btnDeleteData_Click" Text="Delete" Visible="False" Width="94px" />
                     </td>
                 </tr>
                 <tr>
@@ -184,12 +198,12 @@
                         &nbsp;</td>
                 </tr>
                 <tr>
-                    <td class="auto-style9">
-                        &nbsp;</td>
-                    <td class="auto-style25">
+                    <td class="auto-style27">
+                        </td>
+                    <td class="auto-style28">
                         <asp:Label ID="lblSearchTitle" runat="server" Font-Size="Large" Text="Search By Image Title:" Visible="False"></asp:Label>
                     </td>
-                    <td class="auto-style14">
+                    <td class="auto-style29">
                         <asp:TextBox ID="txtDelete" runat="server" CssClass="txtCameraType" Visible="False"></asp:TextBox>
                         <br />
                         <br />
@@ -215,15 +229,14 @@
                 </tr>
                 <tr>
                     <td class="auto-style22">
-                        &nbsp;</td>
+                        </td>
                     <td class="auto-style26">
-                        <asp:Label ID="lblView" runat="server" Font-Size="Large" Text="Image Title:" Visible="False"></asp:Label>
-                    </td>
+                        &nbsp;</td>
                     <td class="auto-style24">
-                        <asp:TextBox ID="txtView" runat="server" CssClass="txtCameraType" Visible="False"></asp:TextBox>
+                        <asp:GridView ID="GridView1" runat="server" AutoGenerateSelectButton="True" OnSelectedIndexChanged="GridView1_SelectedIndexChanged">
+                        </asp:GridView>
                         <br />
                         <br />
-                        <asp:Button ID="btnView" runat="server" CssClass="btnUpload" OnClick="btnView_Click" Text="View" Width="94px" Visible="False" />
                     </td>
                 </tr>
                 <tr>
@@ -232,7 +245,15 @@
                     <td class="auto-style26">
                         &nbsp;</td>
                     <td class="auto-style24">
-                        &nbsp;</td>
+                        <asp:Label ID="lbl1" runat="server" Text="Image Title:" Visible="False"></asp:Label>
+                        <asp:Label ID="lblMTitle" runat="server"></asp:Label>
+                        <br />
+                        <asp:Label ID="lbl2" runat="server" Text="Camera Type:" Visible="False"></asp:Label>
+                        <asp:Label ID="lblCType" runat="server"></asp:Label>
+                        <br />
+                        <asp:Label ID="lbl3" runat="server" Text="Location Of Image:" Visible="False"></asp:Label>
+                        <asp:Label ID="lblLImage" runat="server"></asp:Label>
+                    </td>
                 </tr>
                 <tr>
                     <td class="auto-style22">
@@ -240,7 +261,8 @@
                     <td class="auto-style26">
                         &nbsp;</td>
                     <td class="auto-style24">
-                        &nbsp;</td>
+        <asp:Image ID="imgDisplay" runat="server" Height="250px" Width="300px" />
+                    </td>
                 </tr>
                 <tr>
                     <td class="auto-style22">
@@ -257,7 +279,6 @@
         </div>
         <p>
             &nbsp;&nbsp;</p>
-        <asp:Image ID="imgDisplay" runat="server" />
     </form>
 </body>
 </html>

@@ -56,7 +56,7 @@
            
             <asp:Button Text="Login" CssClass="btnsubmit" runat="server" OnClick="Unnamed4_Click"  />
             <br />
-            <asp:Button ID="btnAccess" runat="server" CssClass="btnsubmit" Text="Share Image"  />
+            <asp:Button ID="btnAccess" runat="server" CssClass="btnsubmit" Text="Share Image" OnClick="btnAccess_Click"  />
             <asp:HyperLink ID="HyperLink1" runat="server" ForeColor="Blue" NavigateUrl="Login.aspx">Don&#39;t have an account?</asp:HyperLink>
             <br />
             <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ControlToValidate="txtusername" ErrorMessage="Require a Username"></asp:RequiredFieldValidator>

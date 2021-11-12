@@ -19,6 +19,7 @@ namespace Project2
         bool Access = false;
         string username;
         string sql;
+        bool registered = false;
         int userID;
         string constr = @"Server = tcp:323projectserver.database.windows.net,1433;Initial Catalog = Users; Persist Security Info=False;User ID = projectadmin; Password=Slimkop21%; MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout = 30;";
         public SqlConnection con;
@@ -96,25 +97,27 @@ namespace Project2
                 sda.Fill(ds, "Users");
                 con.Close();
                 if (ds.Tables[0].Rows.Count > 0)
-                {                   
-                    Response.Write("<script>alert('You alread have an account!')</script>");
+                {
+                    Response.Redirect("Register.aspx");
                 }
                 //Insert new user
                 else
-                {                  
+                {
+                    
+
                     con = new SqlConnection(constr);
                     con.Open();
                     SqlCommand comm;
                     string insert_query = @"INSERT INTO Users VALUES(@Username, @Password, @emailAddress)";
-                    comm = new SqlCommand(insert_query, con);       
+                    comm = new SqlCommand(insert_query, con);
                     comm.Parameters.AddWithValue("@Username", txtusername.Text);
                     comm.Parameters.AddWithValue("@Password", EncryptedString(txtpassword.Text));
                     comm.Parameters.AddWithValue("@emailAddress", txtemail.Text);
                     comm.ExecuteNonQuery();
                     con.Close();
-                    Response.Write("<script>alert('Successfully registered in')</script>");
                     ValidInfo = true;
-                    
+                    registered = true;
+
                 }
                 
         }
@@ -123,36 +126,42 @@ namespace Project2
                Response.Write("<script>alert('Error...')</script>" + ex.Message);
            }
 
-            //Insert data into cookies so that the information can be pull to the next form
-              try
-             {
-                SqlCommand com;
-                con = new SqlConnection(constr);
-                sda = new SqlDataAdapter();
-                ds = new DataSet();
-                con.Open();
-                sql = "SELECT UserID FROM Users WHERE Username='" + txtusername.Text + "' and Password='" + EncryptedString(txtpassword.Text) + "'";
-                com = new SqlCommand(sql, con);
-                sda.SelectCommand = com;
-                userID = (int)com.ExecuteScalar();         
-                email = txtemail.Text;
-                password = txtpassword.Text;
-                username = txtusername.Text;
-
-
-                HttpCookie cookie = new HttpCookie("UserInfo");
-                cookie["email"] = txtemail.Text;
-                cookie["username"] = txtusername.Text;
-                cookie["UserID"] = userID.ToString();
-                cookie.Expires = DateTime.Now.AddSeconds(20);
-                Response.Cookies.Add(cookie);
-                con.Close();
-            }
-            catch (Exception ex)
+            if (registered == true)
             {
-                Response.Write("<script>alert('Error...')</script>" + ex.Message);
+                //Insert data into cookies so that the information can be pull to the next form
+                try
+                {
+                    SqlCommand com;
+                    con = new SqlConnection(constr);
+                    sda = new SqlDataAdapter();
+                    ds = new DataSet();
+                    con.Open();
+                    sql = "SELECT UserID FROM Users WHERE Username='" + txtusername.Text + "' and Password='" + EncryptedString(txtpassword.Text) + "'";
+                    com = new SqlCommand(sql, con);
+                    sda.SelectCommand = com;
+                    userID = (int)com.ExecuteScalar();
+                    email = txtemail.Text;
+                    password = txtpassword.Text;
+                    username = txtusername.Text;
+
+
+                    HttpCookie cookie = new HttpCookie("UserInfo");
+                    cookie["email"] = txtemail.Text;
+                    cookie["username"] = txtusername.Text;
+                    cookie["UserID"] = userID.ToString();
+                    cookie.Expires = DateTime.Now.AddSeconds(20);
+                    Response.Cookies.Add(cookie);
+                    con.Close();
+                }
+                catch (Exception ex)
+                {
+                    Response.Write("<script>alert('Error...')</script>" + ex.Message);
+                }
+                Response.Redirect("ImageShare.aspx");
             }
-            Response.Redirect("ImageShare.aspx");
+     
+           
+           
         }
 
        protected void btnAccess_Click(object sender, EventArgs e)
