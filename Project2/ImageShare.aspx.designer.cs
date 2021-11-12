@@ -114,6 +114,33 @@ namespace Project2
         protected global::System.Web.UI.WebControls.Label lblUsername;
 
         /// <summary>
+        /// lblUserAccess control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblUserAccess;
+
+        /// <summary>
+        /// txtuserAccess control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtuserAccess;
+
+        /// <summary>
+        /// btnPermission control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnPermission;
+
+        /// <summary>
         /// lblTitleData control.
         /// </summary>
         /// <remarks>
@@ -121,15 +148,6 @@ namespace Project2
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblTitleData;
-
-        /// <summary>
-        /// lblTest control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblTest;
 
         /// <summary>
         /// lblImageTile control.
@@ -204,13 +222,13 @@ namespace Project2
         protected global::System.Web.UI.WebControls.Button btnUpdate;
 
         /// <summary>
-        /// btnViewMetadata control.
+        /// btnDeleteData control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnViewMetadata;
+        protected global::System.Web.UI.WebControls.Button btnDeleteData;
 
         /// <summary>
         /// lblDeleteTitle control.
@@ -258,31 +276,67 @@ namespace Project2
         protected global::System.Web.UI.WebControls.Label lblViewTitle;
 
         /// <summary>
-        /// lblView control.
+        /// GridView1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblView;
+        protected global::System.Web.UI.WebControls.GridView GridView1;
 
         /// <summary>
-        /// txtView control.
+        /// lbl1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtView;
+        protected global::System.Web.UI.WebControls.Label lbl1;
 
         /// <summary>
-        /// btnView control.
+        /// lblMTitle control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnView;
+        protected global::System.Web.UI.WebControls.Label lblMTitle;
+
+        /// <summary>
+        /// lbl2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbl2;
+
+        /// <summary>
+        /// lblCType control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblCType;
+
+        /// <summary>
+        /// lbl3 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbl3;
+
+        /// <summary>
+        /// lblLImage control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblLImage;
 
         /// <summary>
         /// imgDisplay control.

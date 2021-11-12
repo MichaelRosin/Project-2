@@ -6,24 +6,6 @@
     font-family: sans-serif;
 }
 
-.container {
-    position: center;
-    width: 1200px;
-    height: 400px;
-    margin: 240px auto;
-}
-
-    .container .box {
-        position: relative;
-        width: calc(500px - 30px);
-        height: calc(550px - 30px);
-        background: #808080;
-        float: left;
-        margin: 15px;
-        box-sizing: border-box;
-        overflow: hidden;
-        border-radius: 10px;
-    }
 
 .lbldelete, .lbladd, .lblview {
     font-weight: bold;
