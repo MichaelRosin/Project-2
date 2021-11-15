@@ -8,7 +8,7 @@
     <link href="Access.css" rel="stylesheet" />
     <style type="text/css">
         .auto-style2 {
-            width: 224px;
+            width: 207px;
         }
         .auto-style4 {
             width: 279px;
@@ -21,7 +21,7 @@
             height: 22px;
         }
         .auto-style7 {
-            width: 224px;
+            width: 207px;
             height: 22px;
         }
         .auto-style8 {
@@ -57,7 +57,7 @@
             <tr>
                 <td class="auto-style4">&nbsp;</td>
                 <td class="auto-style2">
-                    <asp:Image ID="imgDisplay" runat="server" />
+                    <asp:Image ID="imgDisplay" runat="server" Height="250px" Width="300px" />
                 </td>
                 <td>&nbsp;</td>
             </tr>
@@ -102,13 +102,45 @@
             </tr>
             <tr>
                 <td class="auto-style4">&nbsp;</td>
-                <td class="auto-style2">&nbsp;</td>
+                <td class="auto-style2">
+                    <asp:Label ID="Label7" runat="server" Font-Bold="True" Font-Size="Large" Text="Edit Metadata"></asp:Label>
+                </td>
                 <td>&nbsp;</td>
             </tr>
             <tr>
                 <td class="auto-style4">&nbsp;</td>
+                <td class="auto-style2">
+                    <asp:Label ID="Label8" runat="server" Text="Image Title:"></asp:Label>
+                </td>
+                <td>
+                    <asp:TextBox ID="txtImageTitle" runat="server" Width="169px"></asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <td class="auto-style4">&nbsp;</td>
+                <td class="auto-style2">
+                    <asp:Label ID="Label9" runat="server" Text="Camera Type:"></asp:Label>
+                </td>
+                <td>
+                    <asp:TextBox ID="txtCamera" runat="server" Width="170px"></asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <td class="auto-style4">&nbsp;</td>
+                <td class="auto-style2">
+                    <asp:Label ID="Label10" runat="server" Text="Location: Image:"></asp:Label>
+                </td>
+                <td>
+                    <asp:TextBox ID="txtLocation" runat="server" Width="169px"></asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <td class="auto-style4">&nbsp;</td>
                 <td class="auto-style2">&nbsp;</td>
-                <td>&nbsp;</td>
+                <td>
+                    <asp:Button ID="btnUpdate" runat="server" CssClass="btnUpload" OnClick="btnUpdate_Click" Text="Update" Width="91px" />
+&nbsp;<asp:Button ID="btnDelete" runat="server" CssClass="btnUpload" OnClick="btnDelete_Click" Text="Delete" Width="91px" />
+                </td>
             </tr>
             <tr>
                 <td class="auto-style4">&nbsp;</td>

@@ -24,10 +24,10 @@ namespace Project2
         bool imageInserted = false;
         bool DataInserted = false;
         string sql;
+        string DeleteMemeberID;
         int imageID;
         int SelectedimageID;
         string ImageTitle;
-        int delete_member;
         int Update;
         string CameraType;
         string ImageLocation;
@@ -124,16 +124,16 @@ namespace Project2
                     insert_query = @"INSERT INTO Images VALUES(@Image, @UserID)";
                     cmd = new SqlCommand(insert_query, con);                   
                     cmd.Parameters.AddWithValue("@Image", imageArray);
-                    cmd.Parameters.AddWithValue("@UserID", UserID);
+                    cmd.Parameters.AddWithValue("@UserID", lblUserID.Text);
                     sda.SelectCommand = cmd;
                     sda.Fill(ds, "Users");
                     con.Close();                   
                 }
                 imageInserted = true;
            }
-            catch (Exception ex)
+           catch 
            {
-               Response.Write("<script>alert('Error...')</script>" + ex.Message);
+               Response.Write("<script>alert('Error...')</script>");
            }
 
     
@@ -214,6 +214,7 @@ namespace Project2
             txtuserAccess.Visible = true;
             btnPermission.Visible = true;
             lblUserAccess.Visible = true;
+            Button1.Visible = true;
 
 
 
@@ -236,9 +237,9 @@ namespace Project2
               
                
            }
-            catch (Exception ex)
+            catch
             {
-                Response.Write("<script>alert('Error...')</script>" + ex.Message);
+                Response.Write("<script>alert('Error...')</script>");
             }
 
 
@@ -259,9 +260,9 @@ namespace Project2
                 DataInserted = true;
             }
             
-            catch (Exception ex)
+            catch
             {
-                Response.Write("<script>alert('Error...')</script>" + ex.Message);
+                Response.Write("<script>alert('Error...')</script>");
             }
             
 
@@ -298,40 +299,52 @@ namespace Project2
 
         protected void btnDelete_Click(object sender, EventArgs e)
         {
-           try
-           {
-                SqlCommand comm;
-                con = new SqlConnection(constr);
-                adapter = new SqlDataAdapter();
-                ds = new DataSet();
-                con.Open();
-                string view_Image = @"DELETE FROM Metadata WHERE ImageTitle='" + txtDelete.Text + "'";
-                comm = new SqlCommand(view_Image, con);
-                comm.ExecuteNonQuery();
-                con.Close();
+             try
+             {
+                 int delete_member;
+                 bool found = false;
 
-    
+                con = new SqlConnection(constr);
+                SqlCommand cmd;
                 sda = new SqlDataAdapter();
                 con.Open();
-                sql = "SELECT ImageID FROM Metadata WHERE ImageTitle='" + txtDelete.Text + "'";
-                comm = new SqlCommand(sql, con);
-                sda.SelectCommand = comm;
-                delete_member = (int)comm.ExecuteScalar();
+                DeleteMemeberID = "SELECT ImageID FROM Metadata WHERE ImageTitle='" + txtDelete.Text + "'";
+                cmd = new SqlCommand(DeleteMemeberID, con);
+                sda.SelectCommand = cmd;
+                delete_member = (int)cmd.ExecuteScalar();
+                found = true;
                 con.Close();
 
-                con.Open();
-                string delete_image = @"DELETE FROM Images WHERE ImageID='" + delete_member + "'";
-                comm = new SqlCommand(view_Image, con);
-                comm.ExecuteNonQuery();
-                con.Close();
-                Response.Write("<script>alert('Photo and metadata deleted')</script>");
+                if (found == true)
+                {
+                    SqlCommand comm;
+                    con = new SqlConnection(constr);
+                    adapter = new SqlDataAdapter();
+                    ds = new DataSet();
+                    con.Open();
+                    string view_Image = @"DELETE FROM Metadata WHERE ImageTitle='" + txtDelete.Text + "'";
+                    comm = new SqlCommand(view_Image, con);
+                    comm.ExecuteNonQuery();
+                    con.Close();
 
-            }
 
-            catch (Exception ex)
+
+                    con.Open();
+                    string delete_image = @"DELETE FROM Images WHERE ImageID='" + delete_member + "'";
+                    comm = new SqlCommand(view_Image, con);
+                    comm.ExecuteNonQuery();
+                    con.Close();
+                    Response.Write("<script>alert('Photo and metadata deleted')</script>");
+
+                }
+                
+
+             }
+
+            catch 
              {
-             Response.Write("<script>alert('Photo doesn't exist...')</script>" + ex.Message);
-            }
+             Response.Write("<script>alert('Photo doesn't exist...')</script>" );
+             }
         }
 
         protected void btnView_Click(object sender, EventArgs e)
@@ -365,9 +378,9 @@ namespace Project2
 
             }
 
-            catch (Exception ex)
+            catch
             {
-               Response.Write("<script>alert('Photo doesn't exist...')</script>" + ex.Message);
+               Response.Write("<script>alert('Photo doesn't exist...')</script>");
             }
             
         }
@@ -392,9 +405,9 @@ namespace Project2
                 con.Close();
             }
 
-            catch (Exception ex)
+            catch
             {
-                Response.Write("<script>alert('Photo doesn't exist...')</script>" + ex.Message);
+                Response.Write("<script>alert('Photo doesn't exist...')</script>");
             }
         }
 
@@ -480,36 +493,68 @@ namespace Project2
                 lblLImage.Text = ImageLocation;
                 con.Close();
             }
-            catch (Exception ex)
+            catch
             {
-                Response.Write("<script>alert('Photo doesn't exist...')</script>" + ex.Message);
+                Response.Write("<script>alert('Photo doesn't exist...')</script>");
             }
         }
 
         protected void btnPermission_Click(object sender, EventArgs e)
         {
+
+
+
+            try
+            {  
+                    if (txtuserAccess.Text != "")
+                    {
+
+                        con = new SqlConnection(constr);
+                        SqlCommand comm;
+                        sda = new SqlDataAdapter();
+                        con.Open();
+                        sql = "SELECT Top (1)  ImageID FROM Images";
+                        comm = new SqlCommand(sql, con);
+                        sda.SelectCommand = comm;
+                        Update = (int)comm.ExecuteScalar();
+                        con.Close();
+
+                        con = new SqlConnection(constr);
+                        con.Open();
+                        string insert_query = @"INSERT INTO UserAccess VALUES(@UserID, @ImageID, @Access)";
+                        comm = new SqlCommand(insert_query, con);
+                        comm.Parameters.AddWithValue("@UserID", txtuserAccess.Text);
+                        comm.Parameters.AddWithValue("@ImageID", Update);
+                        comm.Parameters.AddWithValue("@Access", 1);
+                        comm.ExecuteNonQuery();
+                        con.Close();
+
+                    }
+                    else
+                    {
+                        Response.Write("<script>alert('Insert UserID')</script>");
+                    }
+            }
+            catch
+            {
+                Response.Write("<script>alert('User doesn't exist...')</script>");
+            }
+           
+        }
+
+        protected void Button1_Click2(object sender, EventArgs e)
+        {
+
             try
             {
                 if (txtuserAccess.Text != "")
                 {
-
-                    con = new SqlConnection(constr);
                     SqlCommand comm;
                     sda = new SqlDataAdapter();
-                    con.Open();
-                    sql = "SELECT Top (1)  ImageID FROM Images";
-                    comm = new SqlCommand(sql, con);
-                    sda.SelectCommand = comm;
-                    Update = (int)comm.ExecuteScalar();
-                    con.Close();
-
                     con = new SqlConnection(constr);
                     con.Open();
-                    string insert_query = @"INSERT INTO UserAccess VALUES(@UserID, @ImageID, @Access)";
+                    string insert_query = @"DELETE FROM UserAccess WHERE UserID='" + txtuserAccess.Text + "'";
                     comm = new SqlCommand(insert_query, con);
-                    comm.Parameters.AddWithValue("@UserID", txtuserAccess.Text);
-                    comm.Parameters.AddWithValue("@ImageID", Update);
-                    comm.Parameters.AddWithValue("@Access", 1);
                     comm.ExecuteNonQuery();
                     con.Close();
 
@@ -518,13 +563,11 @@ namespace Project2
                 {
                     Response.Write("<script>alert('Insert UserID')</script>");
                 }
-
             }
-            catch (Exception ex)
+            catch
             {
-                Response.Write("<script>alert('User doesn't exist...')</script>" + ex.Message);
+                Response.Write("<script>alert('User doesn't exist...')</script>");
             }
-           
         }
     }
 }

@@ -15,6 +15,7 @@ namespace Project2
         string constr = @"Server = tcp:323projectserver.database.windows.net,1433;Initial Catalog = Users; Persist Security Info=False;User ID = projectadmin; Password=Slimkop21%; MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout = 30;";
         public SqlConnection con;
         public DataSet ds;
+        int Update;
         string sql;
         string ImageTitle;
         int SelectedimageID;
@@ -24,7 +25,7 @@ namespace Project2
         public SqlDataAdapter adapter;
         protected void Page_Load(object sender, EventArgs e)
         {
-            ViewDataGrid();
+            
         }
         private void ViewMetaData(int ImgID)
         {
@@ -123,6 +124,91 @@ namespace Project2
         protected void btnSubmit_Click(object sender, EventArgs e)
         {
 
+            try
+            {
+                SqlCommand cmd;
+                con = new SqlConnection(constr);
+                sda = new SqlDataAdapter();
+                ds = new DataSet();
+                con.Open();
+                sql = @"SELECT * FROM UserAccess WHERE UserID='" + txtUserID.Text + "'";
+                cmd = new SqlCommand(sql, con);
+                sda.SelectCommand = cmd;
+                sda.Fill(ds, "Users");
+                con.Close();
+                if (ds.Tables[0].Rows.Count > 0)
+                {
+                    ViewDataGrid();
+
+                }
+                //Insert new user
+                else
+                {
+
+                    Response.Write("<script>alert('User doesn't have access...')</script>");
+
+
+                }
+            }
+            catch
+            {
+                Response.Write("<script>alert('Error...')</script>");
+            }
+
+                ViewDataGrid();
+        }
+
+        protected void btnUpdate_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                con = new SqlConnection(constr);
+                SqlCommand comm;
+                sda = new SqlDataAdapter();
+                con.Open();
+                sql = "SELECT ImageID FROM Metadata WHERE ImageTitle='" + txtImageTitle.Text + "'";
+                comm = new SqlCommand(sql, con);
+                sda.SelectCommand = comm;
+                Update = (int)comm.ExecuteScalar();
+                con.Close();
+
+
+                con = new SqlConnection(constr);
+                con.Open();
+                sda = new SqlDataAdapter();
+                sql = "UPDATE Metadata SET CameraType = '" + txtCamera.Text + "' ,Location_Of_Image = '" + txtLocation.Text + "'  WHERE ImageID ='" + Update + "'";
+                comm = new SqlCommand(sql, con);
+                sda.SelectCommand = comm;
+                comm.ExecuteNonQuery();
+                con.Close();
+
+            }
+
+            catch
+            {
+                Response.Write("<script>alert('Photo doesn't exist...')</script>");
+            }
+        }
+
+        protected void btnDelete_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                SqlCommand comm;
+                con = new SqlConnection(constr);
+                adapter = new SqlDataAdapter();
+                ds = new DataSet();
+                con.Open();
+                string view_Image = @"DELETE FROM Metadata WHERE ImageTitle='" + txtImageTitle.Text + "'";
+                comm = new SqlCommand(view_Image, con);
+                comm.ExecuteNonQuery();
+                con.Close();
+            }
+
+            catch
+            {
+                Response.Write("<script>alert('Photo doesn't exist...')</script>");
+            }
         }
     }
 }

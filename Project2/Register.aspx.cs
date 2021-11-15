@@ -18,7 +18,6 @@ namespace Project2
         bool Access = false;
         string username;
         string sql;
-        string SQL;
         int userID;
         string constr = @"Server = tcp:323projectserver.database.windows.net,1433;Initial Catalog = Users; Persist Security Info=False;User ID = projectadmin; Password=Slimkop21%; MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout = 30;";
         public SqlConnection con;
@@ -46,7 +45,7 @@ namespace Project2
                 b = Convert.FromBase64String(encrString);
                 decrypted = System.Text.ASCIIEncoding.ASCII.GetString(b);
             }
-            catch (FormatException fe)
+            catch 
             {
                 decrypted = "";
             }
@@ -82,9 +81,9 @@ namespace Project2
                 Response.Cookies.Add(cookie);
 
             }
-            catch (Exception ex)
+            catch
             {
-                Response.Write("<script>alert('Error...')</script>" + ex.Message);
+                Response.Write("<script>alert('Error...')</script>");
             }
 
 
@@ -127,9 +126,9 @@ namespace Project2
                 username = txtusername.Text;
                 Response.Redirect("ImageShare.aspx");
             }
-            catch (Exception ex)
+            catch 
             {
-                Response.Write("<script>alert('Error...')</script>" + ex.Message);
+                Response.Write("<script>alert('Error...')</script>");
             }
         }
 
@@ -148,9 +147,11 @@ namespace Project2
                 sda.SelectCommand = cmd;
                 sda.Fill(ds, "Users");
                 con.Close();
+                password = txtpassword.Text;
+                username = txtusername.Text;
                 if (ds.Tables[0].Rows.Count > 0)
                 {
-                    Response.Redirect("ImageShare.aspx");
+                    Response.Redirect("ImageAccess.aspx");
 
                 }
                 else
@@ -158,22 +159,10 @@ namespace Project2
                     Response.Redirect("Login.aspx");
                     Response.Write("<script>alert('You don't have an account')</script>");
                 }
-                con = new SqlConnection(constr);
-                sda = new SqlDataAdapter();
-                ds = new DataSet();
-                con.Open();
-                sql = @"SELECT UserID FROM Users WHERE Username='" + txtusername.Text + "' and Password='" + EncryptedString(txtpassword.Text) + "'";
-                cmd = new SqlCommand(sql, con);
-                sda.SelectCommand = cmd;
-                sda.Fill(ds, "Users");
-                con.Close();
-                password = txtpassword.Text;
-                username = txtusername.Text;
-                Response.Redirect("ImageAccess.aspx");
             }
-            catch (Exception ex)
+            catch 
             {
-                Response.Write("<script>alert('Error...')</script>" + ex.Message);
+                Response.Write("<script>alert('Error...')</script>");
             }
         }
     }
