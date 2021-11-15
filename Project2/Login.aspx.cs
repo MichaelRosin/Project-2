@@ -49,7 +49,7 @@ namespace Project2
                         b = Convert.FromBase64String(encrString);
                         decrypted = System.Text.ASCIIEncoding.ASCII.GetString(b);
                     }
-                    catch (FormatException fe)
+                    catch 
                     {
                         decrypted = "";
                     }
@@ -74,7 +74,7 @@ namespace Project2
                 b = Convert.FromBase64String(encrString);
                 decrypted = System.Text.ASCIIEncoding.ASCII.GetString(b);
             }
-            catch (FormatException fe)
+            catch 
             {
                 decrypted = "";
             }
@@ -166,11 +166,6 @@ namespace Project2
 
        protected void btnAccess_Click(object sender, EventArgs e)
         {
-            /*if (ValidInfo == true && Access == true)
-            {
-                Response.Redirect("ImageAccess.aspx");
-            }
-            */
             Response.Redirect("ImageAccess.aspx");
         }
     }

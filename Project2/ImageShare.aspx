@@ -119,7 +119,9 @@
                     </td>
                     <td class="auto-style24">
                         <asp:TextBox ID="txtuserAccess" runat="server" Visible="False"></asp:TextBox>
-&nbsp;<asp:Button ID="btnPermission" runat="server" CssClass="btnUpload" OnClick="btnPermission_Click" Text="Grant Permission" Visible="False" />
+&nbsp;<asp:Button ID="btnPermission" runat="server" CssClass="btnUpload" OnClick="btnPermission_Click" Text="Grant Permission" Visible="False" Width="150px" />
+                        <br />
+                        <asp:Button ID="Button1" runat="server" CssClass="btnUpload" OnClick="Button1_Click2" Text="Delete Permission" Visible="False" Width="150px" />
                     </td>
                 </tr>
                 <tr>

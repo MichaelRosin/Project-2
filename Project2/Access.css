@@ -12,3 +12,7 @@
     color: #fff;
     position: center;
 }
+
+.btnUpload {
+    cursor: pointer;
+}
