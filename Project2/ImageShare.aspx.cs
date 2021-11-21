@@ -51,6 +51,7 @@ namespace Project2
                 lblUsername.Text = username;
         
             }
+            ViewDataGrid();
         }
 
         private void ViewDataGrid()
@@ -301,43 +302,28 @@ namespace Project2
         {
              try
              {
-                 int delete_member;
-                 bool found = false;
+                int ImageID = int.Parse(txtDelete.Text);
 
+           
+                SqlCommand comm;
                 con = new SqlConnection(constr);
-                SqlCommand cmd;
-                sda = new SqlDataAdapter();
+                adapter = new SqlDataAdapter();
+                ds = new DataSet();
                 con.Open();
-                DeleteMemeberID = "SELECT ImageID FROM Metadata WHERE ImageTitle='" + txtDelete.Text + "'";
-                cmd = new SqlCommand(DeleteMemeberID, con);
-                sda.SelectCommand = cmd;
-                delete_member = (int)cmd.ExecuteScalar();
-                found = true;
+                string view_Image = @"DELETE FROM Metadata WHERE ImageID='" + txtDelete.Text + "'";
+                comm = new SqlCommand(view_Image, con);
+                comm.ExecuteNonQuery();
                 con.Close();
 
-                if (found == true)
-                {
-                    SqlCommand comm;
-                    con = new SqlConnection(constr);
-                    adapter = new SqlDataAdapter();
-                    ds = new DataSet();
-                    con.Open();
-                    string view_Image = @"DELETE FROM Metadata WHERE ImageTitle='" + txtDelete.Text + "'";
-                    comm = new SqlCommand(view_Image, con);
-                    comm.ExecuteNonQuery();
-                    con.Close();
 
 
-
-                    con.Open();
-                    string delete_image = @"DELETE FROM Images WHERE ImageID='" + delete_member + "'";
-                    comm = new SqlCommand(view_Image, con);
-                    comm.ExecuteNonQuery();
-                    con.Close();
-                    Response.Write("<script>alert('Photo and metadata deleted')</script>");
-
-                }
-                
+                con.Open();
+                string delete_image = @"DELETE FROM Images WHERE ImageID='" + ImageID + "'";
+                comm = new SqlCommand(delete_image, con);
+                comm.ExecuteNonQuery();
+                con.Close();
+                ViewDataGrid();
+                Response.Write("<script>alert('Photo and metadata deleted')</script>");
 
              }
 
@@ -345,6 +331,9 @@ namespace Project2
              {
              Response.Write("<script>alert('Photo doesn't exist...')</script>" );
              }
+             
+        
+
         }
 
         protected void btnView_Click(object sender, EventArgs e)
@@ -413,8 +402,45 @@ namespace Project2
 
         protected void GridView1_SelectedIndexChanged(object sender, EventArgs e)
         {
+           
             SelectedimageID = Int32.Parse(GridView1.SelectedRow.Cells[1].Text);
             ViewPhoto(SelectedimageID);
+            try
+            {
+                SqlCommand com;
+                con = new SqlConnection(constr);
+                sda = new SqlDataAdapter();
+                ds = new DataSet();
+                sda = new SqlDataAdapter();
+
+                con.Open();
+                sql = "SELECT ImageTitle FROM Metadata WHERE ImageID = '" + SelectedimageID + "'";
+                com = new SqlCommand(sql, con);
+                sda.SelectCommand = com;
+                ImageTitle = (string)com.ExecuteScalar();
+                lblMTitle.Text = ImageTitle;
+                con.Close();
+
+                con.Open();
+                sql = "SELECT CameraType FROM Metadata WHERE ImageID = '" + SelectedimageID + "'";
+                com = new SqlCommand(sql, con);
+                sda.SelectCommand = com;
+                CameraType = (string)com.ExecuteScalar();
+                lblCType.Text = CameraType;
+                con.Close();
+
+                con.Open();
+                sql = "SELECT Location_Of_Image FROM Metadata WHERE ImageID = '" + SelectedimageID + "'";
+                com = new SqlCommand(sql, con);
+                sda.SelectCommand = com;
+                ImageLocation = (string)com.ExecuteScalar();
+                lblLImage.Text = ImageLocation;
+                con.Close();
+            }
+            catch (Exception ex)
+            {
+                Response.Write("<script>alert('Photo doesn't exist...')</script>" + ex.Message);
+            }
             ViewMetaData(SelectedimageID);
 
         }

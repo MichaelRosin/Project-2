@@ -194,7 +194,7 @@
                     <td class="auto-style9">
                         &nbsp;</td>
                     <td class="auto-style25">
-                        <asp:Label ID="lblDeleteTitle" runat="server" Font-Bold="True" Font-Size="X-Large" Text="Delete Photo" Visible="False"></asp:Label>
+                        <asp:Label ID="lblDeleteTitle" runat="server" Font-Bold="True" Font-Size="X-Large" Text="Delete Photo"></asp:Label>
                     </td>
                     <td class="auto-style14">
                         &nbsp;</td>
@@ -203,13 +203,13 @@
                     <td class="auto-style27">
                         </td>
                     <td class="auto-style28">
-                        <asp:Label ID="lblSearchTitle" runat="server" Font-Size="Large" Text="Search By Image Title:" Visible="False"></asp:Label>
+                        <asp:Label ID="lblSearchTitle" runat="server" Font-Size="Large" Text="Search By Image ID:"></asp:Label>
                     </td>
                     <td class="auto-style29">
-                        <asp:TextBox ID="txtDelete" runat="server" CssClass="txtCameraType" Visible="False"></asp:TextBox>
+                        <asp:TextBox ID="txtDelete" runat="server" CssClass="txtCameraType"></asp:TextBox>
                         <br />
                         <br />
-                        <asp:Button ID="btnDelete" runat="server" CssClass="btnUpload" OnClick="btnDelete_Click" Text="Delete" Width="94px" Visible="False" />
+                        <asp:Button ID="btnDelete" runat="server" CssClass="btnUpload" OnClick="btnDelete_Click" Text="Delete" Width="94px" />
                         </td>
                 </tr>
                 <tr>
@@ -224,7 +224,7 @@
                     <td class="auto-style22">
                         &nbsp;</td>
                     <td class="auto-style26">
-                        <asp:Label ID="lblViewTitle" runat="server" Font-Bold="True" Font-Size="X-Large" Text="View Photo" Visible="False"></asp:Label>
+                        <asp:Label ID="lblViewTitle" runat="server" Font-Bold="True" Font-Size="X-Large" Text="View Photo"></asp:Label>
                     </td>
                     <td class="auto-style24">
                         &nbsp;</td>
@@ -247,13 +247,13 @@
                     <td class="auto-style26">
                         &nbsp;</td>
                     <td class="auto-style24">
-                        <asp:Label ID="lbl1" runat="server" Text="Image Title:" Visible="False"></asp:Label>
+                        <asp:Label ID="lbl1" runat="server" Text="Image Title:"></asp:Label>
                         <asp:Label ID="lblMTitle" runat="server"></asp:Label>
                         <br />
-                        <asp:Label ID="lbl2" runat="server" Text="Camera Type:" Visible="False"></asp:Label>
+                        <asp:Label ID="lbl2" runat="server" Text="Camera Type:"></asp:Label>
                         <asp:Label ID="lblCType" runat="server"></asp:Label>
                         <br />
-                        <asp:Label ID="lbl3" runat="server" Text="Location Of Image:" Visible="False"></asp:Label>
+                        <asp:Label ID="lbl3" runat="server" Text="Location Of Image:"></asp:Label>
                         <asp:Label ID="lblLImage" runat="server"></asp:Label>
                     </td>
                 </tr>
